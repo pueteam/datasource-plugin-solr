@@ -4,7 +4,7 @@
   "id": "pue-solr-datasource",
 
   "info": {
-    "description": "SolR datasource",
+    "description": "Solr datasource",
     "author": {
       "name": "Sergio Rodriguez de Guzman - PUE Team",
       "url": "https://github.com/pueteam"
