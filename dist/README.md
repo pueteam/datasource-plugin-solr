@@ -1,7 +1,7 @@
-SolR Datasource for Grafana
+Solr Datasource for Grafana
 ===========================
 
-This plugin for [Grafana](http://grafana.org) provides an advanced datasource for querying SolR server >= 4. This datasource also provides support for the SolR version bundled with [Cloudera CDH 5.X](https://www.cloudera.com).
+This plugin for [Grafana](http://grafana.org) provides an advanced datasource for querying Solr server >= 4. This datasource also provides support for the Solr version bundled with [Cloudera CDH 5.X](https://www.cloudera.com).
 
 This project is open source pursuant to the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 It is copyright (C) 2018 by PUE Team.
@@ -18,9 +18,9 @@ grafana-cli plugins install pue-solr-datasource
 Configuration
 -------------
 
-1. Add a new datasource and choose "SolR" as the type.
+1. Add a new datasource and choose "Solr" as the type.
 
-2. Fill in the "Url" and other server parameters. If you run SolR in a kerberized cluster, you'll need LDAP authentication enabled, and provide the credentials here.
+2. Fill in the "Url" and other server parameters. If you run Solr in a kerberized cluster, you'll need LDAP authentication enabled, and provide the credentials here.
 
 3. Optionally, add the collection to use. This is required if you plan to use templates.
 
@@ -33,7 +33,7 @@ Queries
 
 First, select the query type. You can choose between `standard` and `group`. The `standard` query is the default.
 
-- **Standard Queries**: The `standard` queries will execute regular queries against SolR. You'll need to fill the `Collection`, the `Timestamp` field, the `Fields` list (space or comma separated) and the `Query` in the Solr format `*:*`.
+- **Standard Queries**: The `standard` queries will execute regular queries against Solr. You'll need to fill the `Collection`, the `Timestamp` field, the `Fields` list (space or comma separated) and the `Query` in the Solr format `*:*`.
 
 - **Group Queries**: The `group` type allows you to group results by `Group By Field` parameter. You'll also need to fill the `Group Value Field` and this parameter should be **numeric**. You can also limit the `Max Group Rows` results.
 

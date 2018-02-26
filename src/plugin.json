@@ -1,6 +1,6 @@
 {
   "type": "datasource",
-  "name": "SolR",
+  "name": "Solr",
   "id": "pue-solr-datasource",
 
   "info": {
