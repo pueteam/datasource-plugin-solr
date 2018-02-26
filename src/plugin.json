@@ -1,0 +1,35 @@
+{
+  "type": "datasource",
+  "name": "SolR",
+  "id": "pue-solr-datasource",
+
+  "info": {
+    "description": "SolR datasource",
+    "author": {
+      "name": "Sergio Rodriguez de Guzman - PUE Team",
+      "url": "https://github.com/pueteam"
+    },
+    "keywords": ["solr", "datasource"],
+    "links": [
+      {"name": "Project site", "url": "https://github.com/pueteam/datasource-plugin-solr"},
+      {"name": "Apache License", "url": "https://github.com/pueteam/datasource-plugin-solr/blob/master/LICENSE"}
+    ],
+    "version": "1.0.0",
+    "updated": "2018-02-26",
+    "logos": {
+      "small": "images/solr.svg",
+      "large": "images/solr.svg"
+    }
+  },
+
+  "dependencies": {
+    "grafanaVersion": "3.x.x",
+    "plugins": []
+  },
+
+  "module": "plugins/pueteam-solr-datasource/module",
+  "staticRoot": ".",
+
+  "metrics": true,
+  "annotations": true
+}
