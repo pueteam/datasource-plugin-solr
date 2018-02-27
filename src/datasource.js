@@ -72,6 +72,7 @@ export class SolrDatasource {
   // Query for metric targets within the specified time range.
   // Returns the promise of a result dictionary.
   query(queryOptions) {
+    //console.log('QUERY: ' + JSON.stringify(queryOptions));
     var self = this;
 
     var targetPromises = _(queryOptions.targets)
@@ -88,9 +89,9 @@ export class SolrDatasource {
         //var url = '/api/v' + self.apiVersion + '/timeseries';
         //fq=time:[2018-01-24T02:59:10.000Z TO 2018-01-24T14:59:10.000Z]
         var url = '/solr/' + target.collection + '/select?wt=json';
-        var rows = target.maxDataPoints || '200000';
+        //var rows = queryOptions.maxDataPoints || '100000';
+        var rows = 100000;
         var q = self.templateSrv.replace(target.target, queryOptions.scopedVars);
-        var groupParams = 'group=false';
         q = self.queryBuilder(q);
         var query = {
           //query: templateSrv.replace(target.target, queryOptions.scopedVars),
@@ -152,10 +153,7 @@ export class SolrDatasource {
       url: url
     };
 
-    return this.doRequest({
-      url: url,
-      method: 'GET',
-    }).then(this.mapToTextValue);
+    return this.doRequest(requestOptions).then(this.mapToTextValue);
   }
 
   listFields(query, collection) {
@@ -171,10 +169,7 @@ export class SolrDatasource {
       url: url
     };
 
-    return this.doRequest({
-      url: url,
-      method: 'GET',
-    }).then(this.mapToTextValue);
+    return this.doRequest(requestOptions).then(this.mapToTextValue);
   }
 
   metricFindQuery(query) {
@@ -245,7 +240,7 @@ export class SolrDatasource {
     for (var property in series) {
       seriesList.push({
         target: property,
-        datapoints: series[property]
+        datapoints: series[property].reverse()
       });
     }
     return {
@@ -258,7 +253,6 @@ export class SolrDatasource {
     var data = response.data;
     var groupBy = data.responseHeader.params['group.field'];
     var seriesList = [];
-    var series = {};
     _(data.grouped[groupBy].groups).forEach(function (item) {
       var target = item.groupValue || 'N/A';
       var datapoints = [];
@@ -272,7 +266,7 @@ export class SolrDatasource {
       }
       seriesList.push({
         target: target,
-        datapoints: datapoints
+        datapoints: datapoints.reverse()
       });
     });
     return {
@@ -281,8 +275,6 @@ export class SolrDatasource {
   }
 
   convertResponse(response) {
-
-    var self = this;
 
     var data = response.data;
 
@@ -316,7 +308,7 @@ export class SolrDatasource {
       limit: 10
     };
 
-    var url = this.url + '/solr/' + annotation.collection + '/select?wt=json&defType=edismax';
+    var url = this.url + '/solr/' + collection + '/select?wt=json&defType=edismax';
 
     var requestOptions;
 

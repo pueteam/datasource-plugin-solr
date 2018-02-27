@@ -99,6 +99,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
         }, {
           key: 'query',
           value: function query(queryOptions) {
+            //console.log('QUERY: ' + JSON.stringify(queryOptions));
             var self = this;
 
             var targetPromises = _(queryOptions.targets).filter(function (target) {
@@ -113,9 +114,9 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
               //var url = '/api/v' + self.apiVersion + '/timeseries';
               //fq=time:[2018-01-24T02:59:10.000Z TO 2018-01-24T14:59:10.000Z]
               var url = '/solr/' + target.collection + '/select?wt=json';
-              var rows = target.maxDataPoints || '200000';
+              //var rows = queryOptions.maxDataPoints || '100000';
+              var rows = 100000;
               var q = self.templateSrv.replace(target.target, queryOptions.scopedVars);
-              var groupParams = 'group=false';
               q = self.queryBuilder(q);
               var query = {
                 //query: templateSrv.replace(target.target, queryOptions.scopedVars),
@@ -179,10 +180,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
               url: url
             };
 
-            return this.doRequest({
-              url: url,
-              method: 'GET'
-            }).then(this.mapToTextValue);
+            return this.doRequest(requestOptions).then(this.mapToTextValue);
           }
         }, {
           key: 'listFields',
@@ -199,10 +197,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
               url: url
             };
 
-            return this.doRequest({
-              url: url,
-              method: 'GET'
-            }).then(this.mapToTextValue);
+            return this.doRequest(requestOptions).then(this.mapToTextValue);
           }
         }, {
           key: 'metricFindQuery',
@@ -277,7 +272,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
             for (var property in series) {
               seriesList.push({
                 target: property,
-                datapoints: series[property]
+                datapoints: series[property].reverse()
               });
             }
             return {
@@ -291,7 +286,6 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
             var data = response.data;
             var groupBy = data.responseHeader.params['group.field'];
             var seriesList = [];
-            var series = {};
             _(data.grouped[groupBy].groups).forEach(function (item) {
               var target = item.groupValue || 'N/A';
               var datapoints = [];
@@ -305,7 +299,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
               }
               seriesList.push({
                 target: target,
-                datapoints: datapoints
+                datapoints: datapoints.reverse()
               });
             });
             return {
@@ -315,8 +309,6 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
         }, {
           key: 'convertResponse',
           value: function convertResponse(response) {
-
-            var self = this;
 
             var data = response.data;
 
@@ -351,7 +343,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
               limit: 10
             };
 
-            var url = this.url + '/solr/' + annotation.collection + '/select?wt=json&defType=edismax';
+            var url = this.url + '/solr/' + collection + '/select?wt=json&defType=edismax';
 
             var requestOptions;
 
