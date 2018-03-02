@@ -155,6 +155,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
                 })
               };
               result.data = _.flatten(result.data);
+              //console.log('RESULT: ' + JSON.stringify(result));
               return result;
             });
           }
@@ -282,17 +283,18 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
         }, {
           key: 'convertResponseGrouped',
           value: function convertResponseGrouped(response) {
-            var self = this;
             var data = response.data;
             var groupBy = data.responseHeader.params['group.field'];
             var seriesList = [];
+            // Recover the timestamp variable used for filtering
+            var time = response.data.responseHeader.params.fl.split(',')[0];
             _(data.grouped[groupBy].groups).forEach(function (item) {
               var target = item.groupValue || 'N/A';
               var datapoints = [];
               for (var i = 0; i < item.doclist.docs.length; i++) {
                 for (var property in item.doclist.docs[i]) {
-                  if (item.doclist.docs[i].hasOwnProperty(property) && property != self.time) {
-                    var t = moment.utc(item.doclist.docs[i][self.time]).unix() * 1000;
+                  if (item.doclist.docs[i].hasOwnProperty(property) && property != time) {
+                    var t = moment.utc(item.doclist.docs[i][time]).unix() * 1000;
                     datapoints.push([item.doclist.docs[i][property], t]);
                   }
                 }
