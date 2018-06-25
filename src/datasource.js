@@ -162,7 +162,7 @@ export class SolrDatasource {
     if (!collection) {
       return [];
     }
-    var url = this.url + '/solr/' + collection + '/select?q=*:*&wt=csv&rows=0';
+    var url = this.url + '/solr/' + collection + '/select?q=*:*&wt=csv&rows=1';
     var requestOptions;
 
     requestOptions = {
@@ -212,7 +212,7 @@ export class SolrDatasource {
       return ar;
     }
     if (result.data) {
-      return result.data.split(',').map(function (field) {
+      return result.data.split('\n')[0].split(',').map(function (field) {
         return {
           text: field,
           value: field

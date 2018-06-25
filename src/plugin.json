@@ -14,8 +14,8 @@
       {"name": "Project site", "url": "https://github.com/pueteam/datasource-plugin-solr"},
       {"name": "Apache License", "url": "https://github.com/pueteam/datasource-plugin-solr/blob/master/LICENSE"}
     ],
-    "version": "1.0.0",
-    "updated": "2018-02-26",
+    "version": "1.0.1",
+    "updated": "2018-06-25",
     "logos": {
       "small": "images/solr.svg",
       "large": "images/solr.svg"

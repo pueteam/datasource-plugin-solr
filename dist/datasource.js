@@ -190,7 +190,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
             if (!collection) {
               return [];
             }
-            var url = this.url + '/solr/' + collection + '/select?q=*:*&wt=csv&rows=0';
+            var url = this.url + '/solr/' + collection + '/select?q=*:*&wt=csv&rows=1';
             var requestOptions;
 
             requestOptions = {
@@ -243,7 +243,8 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
               return ar;
             }
             if (result.data) {
-              return result.data.split(',').map(function (field) {
+              console.log('Data: ' + JSON.stringify(result.data));
+              return result.data.split('\n')[0].split(',').map(function (field) {
                 return {
                   text: field,
                   value: field
