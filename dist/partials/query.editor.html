@@ -1,52 +1,54 @@
 <query-editor-row query-ctrl="ctrl" class="solr-datasource-query-row" has-text-edit-mode="true">
 	<div class="gf-form-inline">
 		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Type</label>
-			<select class="gf-form-input" ng-model="ctrl.target.groupEnabled" ng-options="f as f for f in ['group','standard']"></select>
+			<label class="gf-form-label query-keyword width-10">Type</label>
+			<select class="gf-form-input width-16" ng-model="ctrl.target.groupEnabled" ng-options="f as f for f in ['group','standard']"></select>
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Collection</label>
+			<label class="gf-form-label query-keyword width-10">Collection</label>
 			<gf-form-dropdown model="ctrl.target.collection" allow-custom="true" lookup-text="true" css-class="gf-form-input width-16" get-options="ctrl.listCollection($query)"
 			    on-change="ctrl.onChangeInternal()">
 			</gf-form-dropdown>
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Timestamp</label>
-			<gf-form-dropdown model="ctrl.target.time" allow-custom="true" lookup-text="true" css-class="gf-form-input width-12" get-options="ctrl.listFields($query,ctrl.target.collection)"
+			<label class="gf-form-label query-keyword width-10">Timestamp</label>
+			<gf-form-dropdown model="ctrl.target.time" allow-custom="true" lookup-text="true" css-class="gf-form-input width-16" get-options="ctrl.listFields($query,ctrl.target.collection)"
 			    on-change="ctrl.onChangeInternal()">
 			</gf-form-dropdown>
-		</div>
-		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Query</label>
-			<input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.target" placeholder="q=" data-min-length="0"
-			    ng-blur="ctrl.refresh()" />
 		</div>
 	</div>
 	<div class="gf-form-inline" ng-if="ctrl.target.groupEnabled === 'standard'">
 		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Fields</label>
-			<gf-form-dropdown model="ctrl.target.fields" allow-custom="true" lookup-text="true" css-class="gf-form-input width-12" get-options="ctrl.listFields($query,ctrl.target.collection)"
+			<label class="gf-form-label query-keyword width-10">Fields</label>
+			<gf-form-dropdown model="ctrl.target.fields" allow-custom="true" lookup-text="true" css-class="gf-form-input width-16" get-options="ctrl.listFields($query,ctrl.target.collection)"
 			    on-change="ctrl.onChangeInternal()">
 			</gf-form-dropdown>
 		</div>
 	</div>
 	<div class="gf-form-inline" ng-if="ctrl.target.groupEnabled === 'group'">
 		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Group Value Field</label>
-			<gf-form-dropdown model="ctrl.target.fields" allow-custom="true" lookup-text="true" css-class="gf-form-input width-12" get-options="ctrl.listFields($query,ctrl.target.collection)"
+			<label class="gf-form-label query-keyword width-10">Group Value Field</label>
+			<gf-form-dropdown model="ctrl.target.fields" allow-custom="true" lookup-text="true" css-class="gf-form-input width-16" get-options="ctrl.listFields($query,ctrl.target.collection)"
 			    on-change="ctrl.onChangeInternal()">
 			</gf-form-dropdown>
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Group By Field</label>
-			<gf-form-dropdown model="ctrl.target.groupByField" allow-custom="true" lookup-text="true" css-class="gf-form-input width-12" get-options="ctrl.listFields($query,ctrl.target.collection)"
+			<label class="gf-form-label query-keyword width-10">Group By Field</label>
+			<gf-form-dropdown model="ctrl.target.groupByField" allow-custom="true" lookup-text="true" css-class="gf-form-input width-16" get-options="ctrl.listFields($query,ctrl.target.collection)"
 			    on-change="ctrl.onChangeInternal()">
 			</gf-form-dropdown>
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label query-keyword">Max Group Rows</label>
-			<input type="text" class="gf-form-input input-medium" ng-model="ctrl.target.groupLimit" placeholder="100000" data-min-length="0"
+			<label class="gf-form-label query-keyword width-10">Max Group Rows</label>
+			<input type="text" class="gf-form-input input-medium width-16" ng-model="ctrl.target.groupLimit" placeholder="100000" data-min-length="0"
 			    ng-blur="ctrl.refresh()" />
+		</div>
+	</div>
+	<div class="gf-form-inline">
+		<div class="gf-form">
+			<label class="gf-form-label query-keyword width-10">Query</label>
+			<input type="text" class="gf-form-input input-medium width-16" ng-model="ctrl.target.target" placeholder="q=" data-min-length="0"
+				ng-blur="ctrl.refresh()" />
 		</div>
 	</div>
 </query-editor-row>

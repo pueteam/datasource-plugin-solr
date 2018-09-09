@@ -243,7 +243,6 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
               return ar;
             }
             if (result.data) {
-              console.log('Data: ' + JSON.stringify(result.data));
               return result.data.split('\n')[0].split(',').map(function (field) {
                 return {
                   text: field,

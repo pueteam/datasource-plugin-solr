@@ -9,11 +9,14 @@ It is copyright (C) 2018 by PUE Team.
 Installation
 ------------
 
-The easiest way to install this plugin is with `grafana-cli`. Just run the following command:
+The easiest way to install this plugin is to clone or unzip this repository on the grafana plugins folder. For example:
 
 ```bash
-grafana-cli plugins install pue-solr-datasource
+cd /var/lib/grafana/plugins
+git clone https://github.com/pueteam/datasource-plugin-solr
 ```
+
+Then restart grafana to reload the plugins folder.
 
 Configuration
 -------------
