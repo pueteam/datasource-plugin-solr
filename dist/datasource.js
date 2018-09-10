@@ -169,7 +169,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
         }, {
           key: 'queryBuilder',
           value: function queryBuilder(query) {
-            return query.replace('{', '(').replace('}', ')').replace(',', ' OR ');
+            return query.replace(/{/g, '(').replace(/}/g, ')').replace(/,/g, ' OR ');
           }
         }, {
           key: 'getOptions',

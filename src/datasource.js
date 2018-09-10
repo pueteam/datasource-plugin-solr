@@ -144,7 +144,7 @@ export class SolrDatasource {
   }
 
   queryBuilder(query) {
-    return query.replace('{', '(').replace('}', ')').replace(',', ' OR ');
+    return query.replace(/{/g, '(').replace(/}/g, ')').replace(/,/g, ' OR ');
   }
 
   getOptions(query) {
