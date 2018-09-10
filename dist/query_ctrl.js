@@ -82,6 +82,7 @@ System.register(['app/plugins/sdk'], function (_export, _context) {
           _this.target.groupByField = _this.target.groupByField || '';
           _this.target.groupLimit = _this.target.groupLimit || 100000;
           _this.target.collection = _this.target.collection || _this.datasource.solrCollection || '';
+          _this.target.solrCloudMode = _this.target.solrCloudMode || _this.datasource.solrCloudMode || true;
           return _this;
         }
 

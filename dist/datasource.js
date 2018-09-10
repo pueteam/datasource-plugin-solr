@@ -56,6 +56,7 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
           this.templateSrv = templateSrv;
           this.backendSrv = backendSrv;
           this.solrCollection = instanceSettings.jsonData.solrCollection;
+          this.solrCloudMode = instanceSettings.jsonData.solrCloudMode;
 
           // Helper to make API requests to Solr. To avoid CORS issues, the requests may be proxied
           // through Grafana's backend via `backendSrv.datasourceRequest`.
@@ -92,6 +93,12 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
                   status: "success",
                   message: "Data source is working",
                   title: "Success"
+                };
+              } else {
+                return {
+                  status: "error",
+                  message: "Data source is NOT working",
+                  title: "Error"
                 };
               }
             });
@@ -173,6 +180,9 @@ System.register(['lodash', 'jquery', 'moment', 'app/core/utils/datemath'], funct
           key: 'listCollections',
           value: function listCollections(query) {
             // solr/admin/collections?action=LIST&wt=json
+            if (!this.solrCloudMode) {
+              return [];
+            }
             var url = this.url + '/solr/admin/collections?action=LIST&wt=json';
             var requestOptions;
 

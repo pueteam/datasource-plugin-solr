@@ -36,6 +36,7 @@ export class SolrQueryCtrl extends QueryCtrl {
     this.target.groupByField = this.target.groupByField || '';
     this.target.groupLimit = this.target.groupLimit || 100000;
     this.target.collection = this.target.collection || this.datasource.solrCollection || '';
+    this.target.solrCloudMode = this.target.solrCloudMode || this.datasource.solrCloudMode || true;
   }
   getOptions(query) {
     return this.datasource.listCollections(query || '');

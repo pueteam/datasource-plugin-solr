@@ -32,6 +32,7 @@ export class SolrDatasource {
     this.templateSrv = templateSrv;
     this.backendSrv = backendSrv;
     this.solrCollection = instanceSettings.jsonData.solrCollection;
+    this.solrCloudMode = instanceSettings.jsonData.solrCloudMode;
 
     // Helper to make API requests to Solr. To avoid CORS issues, the requests may be proxied
     // through Grafana's backend via `backendSrv.datasourceRequest`.
@@ -64,6 +65,12 @@ export class SolrDatasource {
           status: "success",
           message: "Data source is working",
           title: "Success"
+        };
+      } else {
+        return {
+          status: "error",
+          message: "Data source is NOT working",
+          title: "Error"
         };
       }
     });
@@ -146,6 +153,9 @@ export class SolrDatasource {
 
   listCollections(query) {
     // solr/admin/collections?action=LIST&wt=json
+    if (!this.solrCloudMode) {
+      return [];
+    }
     var url = this.url + '/solr/admin/collections?action=LIST&wt=json';
     var requestOptions;
 
