@@ -95,12 +95,13 @@ export class SolrDatasource {
         }
         //var url = '/api/v' + self.apiVersion + '/timeseries';
         //fq=time:[2018-01-24T02:59:10.000Z TO 2018-01-24T14:59:10.000Z]
-        var url = '/solr/' + target.collection + '/select?wt=json';
+        var url = '/solr/' + target.collection + '/select';
         //var rows = queryOptions.maxDataPoints || '100000';
         var rows = 100000;
         var q = self.templateSrv.replace(target.target, queryOptions.scopedVars);
         q = self.queryBuilder(q);
         var query = {
+	  wt: json,	
           //query: templateSrv.replace(target.target, queryOptions.scopedVars),
           fq: target.time + ':[' + queryOptions.range.from.toJSON() + ' TO ' + queryOptions.range.to.toJSON() + ']',
           q: q,
@@ -317,14 +318,16 @@ export class SolrDatasource {
     const end = options.range.to.toISOString();
     const query = {
       q: `${baseQuery} AND ${timeField}:[${start} TO ${end}]`,
-      limit: 10
+      limit: 10,
+      wt: 'json',	
+      defType: 'edismax'
     };
 
-    var url = this.url + '/solr/' + collection + '/select?wt=json&defType=edismax';
+    var url = this.url + '/solr/' + collection + '/select';
 
     var requestOptions;
 
-    requestOptions = {
+    requestOptions = {     
       method: 'GET',
       url: url,
       params: query
