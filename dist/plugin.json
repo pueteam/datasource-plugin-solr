@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
   "name": "Solr",
   "id": "pue-solr-datasource",
@@ -14,21 +15,24 @@
       {"name": "Project site", "url": "https://github.com/pueteam/datasource-plugin-solr"},
       {"name": "Apache License", "url": "https://github.com/pueteam/datasource-plugin-solr/blob/master/LICENSE"}
     ],
-    "version": "1.0.2",
-    "updated": "2018-09-09",
+    "version": "1.0.4",
+    "updated": "2022-06-02",
+    "screenshots": [],
     "logos": {
       "small": "images/solr.svg",
       "large": "images/solr.svg"
     }
   },
-
+  "routes": [
+    {
+      "path": "example",
+      "url": "{{ .jsonData.url }}"
+    }
+  ],
   "dependencies": {
-    "grafanaVersion": "3.x.x",
+    "grafanaDependency": ">=7.0.0",
     "plugins": []
   },
-
-  "module": "plugins/pueteam-solr-datasource/module",
-  "staticRoot": ".",
 
   "metrics": true,
   "annotations": true

@@ -11,16 +11,22 @@
   "bugs": {
     "url": "https://github.com/pueteam/datasource-plugin-solr/issues"
   },
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch",
+    "sign": "grafana-toolkit plugin:sign",
+    "start": "yarn watch"
+  },
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "babel-cli": "~6.23.0",
-    "grunt-babel": "~6.0.0",
-    "grunt-contrib-clean": "^1.1.0",
-    "grunt-contrib-compress": "~1.4.3",
-    "grunt-contrib-copy": "~1.0.0",
-    "grunt-contrib-watch": "~1.0.0",
-    "grunt-systemjs-builder": "^1.0.0",
-    "load-grunt-tasks": "~3.5.2"
+    "@grafana/data": "latest",
+    "@grafana/runtime": "latest",
+    "@grafana/toolkit": "latest",
+    "@grafana/ui": "latest",
+    "@testing-library/jest-dom": "5.4.0",
+    "@testing-library/react": "^10.0.2",
+    "@types/lodash": "latest"
   },
   "dependencies": {
     "babel-plugin-transform-es2015-modules-systemjs": "^6.6.0",
