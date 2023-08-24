@@ -101,7 +101,7 @@ export class SolrDatasource {
         var q = self.templateSrv.replace(target.target, queryOptions.scopedVars);
         q = self.queryBuilder(q);
         var query = {
-	  wt: json,	
+          wt: 'json',
           //query: templateSrv.replace(target.target, queryOptions.scopedVars),
           fq: target.time + ':[' + queryOptions.range.from.toJSON() + ' TO ' + queryOptions.range.to.toJSON() + ']',
           q: q,
